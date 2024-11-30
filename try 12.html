@@ -1,0 +1,275 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marudhara Live Kabaddi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+
+        .header {
+            text-align: center;
+            padding: 10px 0;
+            background-color: #007bff;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .scoreboard {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        .team-box {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            margin: 10px;
+            color: white;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+
+        .team-a {
+            background-color: #ff4d4d;
+        }
+
+        .team-b {
+            background-color: #4d79ff;
+        }
+
+        .score {
+            font-size: 36px;
+        }
+
+        .player-count {
+            margin-top: 10px;
+            font-size: 16px;
+        }
+
+        .half-box {
+            flex: 0.5;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #4caf50;
+        }
+
+        .vs-box {
+            position: absolute;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            background-color: black;
+            padding: 5px 20px;
+            border-radius: 5px;
+        }
+
+        .button-section {
+            margin: 20px 0;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .button-column {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .button {
+            width: 80px;
+            height: 50px;
+            margin: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .team-a-buttons .button {
+            background-color: #ff4d4d;
+        }
+
+        .team-b-buttons .button {
+            background-color: #4d79ff;
+        }
+
+        .score-buttons-row {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .half-buttons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .half-button {
+            margin: 0 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            background-color: #4caf50;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">Marudhara Live Kabaddi</div>
+
+    <div class="scoreboard" id="scoreboard">
+        <div class="team-box team-a" id="team-a">
+            <div id="team-a-name">Team A</div>
+            <div id="team-a-score" class="score">00</div>
+            <div class="player-count">PCount: <span id="team-a-player">0</span></div>
+        </div>
+        <div class="vs-box">VS</div>
+        <div class="half-box" id="half-box">1st HALF</div>
+        <div class="team-box team-b" id="team-b">
+            <div id="team-b-name">Team B</div>
+            <div id="team-b-score" class="score">00</div>
+            <div class="player-count">PCount: <span id="team-b-player">0</span></div>
+        </div>
+    </div>
+
+    <div class="button-section" id="button-section">
+        <div class="button-column team-a-buttons" id="team-a-buttons">
+            <button class="button" onclick="editTeamName('A')">Edit Name</button>
+            <div class="score-buttons-row">
+                <button class="button" onclick="updateScore('A', 1)">+1</button>
+                <button class="button" onclick="updateScore('A', -1)">-1</button>
+            </div>
+            <div class="score-buttons-row">
+                <button class="button" onclick="updateScore('A', 2)">+2</button>
+                <button class="button" onclick="updateScore('A', 3)">+3</button>
+            </div>
+            <div class="score-buttons-row">
+                <button class="button" onclick="updateScore('A', 4)">+4</button>
+                <button class="button" onclick="updateScore('A', 1)">Bounce</button>
+            </div>
+            <div class="score-buttons-row">
+                <button class="button" onclick="updatePlayerCount('A', 1)">PCount +</button>
+                <button class="button" onclick="updatePlayerCount('A', -1)">PCount -</button>
+            </div>
+        </div>
+        <div class="button-column team-b-buttons" id="team-b-buttons">
+            <button class="button" onclick="editTeamName('B')">Edit Name</button>
+            <div class="score-buttons-row">
+                <button class="button" onclick="updateScore('B', 1)">+1</button>
+                <button class="button" onclick="updateScore('B', -1)">-1</button>
+            </div>
+            <div class="score-buttons-row">
+                <button class="button" onclick="updateScore('B', 2)">+2</button>
+                <button class="button" onclick="updateScore('B', 3)">+3</button>
+            </div>
+            <div class="score-buttons-row">
+                <button class="button" onclick="updateScore('B', 4)">+4</button>
+                <button class="button" onclick="updateScore('B', 1)">Bounce</button>
+            </div>
+            <div class="score-buttons-row">
+                <button class="button" onclick="updatePlayerCount('B', 1)">PCount +</button>
+                <button class="button" onclick="updatePlayerCount('B', -1)">PCount -</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="half-buttons">
+        <button class="half-button" onclick="setHalf(1)">1st HALF</button>
+        <button class="half-button" onclick="setHalf(2)">2nd HALF</button>
+    </div>
+
+    <script>
+        function updateScore(team, points) {
+            const scoreElement = document.getElementById(`team-${team.toLowerCase()}-score`);
+            let score = parseInt(scoreElement.textContent);
+            score += points;
+            if (score < 0) score = 0;
+            scoreElement.textContent = score.toString().padStart(2, '0');
+        }
+
+        function updatePlayerCount(team, change) {
+            const playerElement = document.getElementById(`team-${team.toLowerCase()}-player`);
+            let count = parseInt(playerElement.textContent);
+            count += change;
+            if (count < 0) count = 0;
+            if (count > 7) count = 7;
+            playerElement.textContent = count;
+        }
+
+        function editTeamName(team) {
+            const name = prompt(`Enter new name for Team ${team}`);
+            if (name) {
+                document.getElementById(`team-${team.toLowerCase()}-name`).textContent = name;
+            }
+        }
+
+        function setHalf(half) {
+            const halfBox = document.getElementById('half-box');
+            halfBox.textContent = `${half}st HALF`;
+
+            if (half === 2) {
+                swapTeams();
+            } else {
+                resetTeams();
+            }
+        }
+
+        function swapTeams() {
+            const teamA = document.getElementById('team-a');
+            const teamB = document.getElementById('team-b');
+            const teamAButtons = document.getElementById('team-a-buttons');
+            const teamBButtons = document.getElementById('team-b-buttons');
+
+            const scoreboard = document.getElementById('scoreboard');
+            const buttonSection = document.getElementById('button-section');
+
+            scoreboard.insertBefore(teamB, document.querySelector('.vs-box'));
+            scoreboard.appendChild(teamA);
+
+            buttonSection.insertBefore(teamBButtons, teamAButtons);
+        }
+
+        function resetTeams() {
+            const teamA = document.getElementById('team-a');
+            const teamB = document.getElementById('team-b');
+            const teamAButtons = document.getElementById('team-a-buttons');
+            const teamBButtons = document.getElementById('team-b-buttons');
+
+            const scoreboard = document.getElementById('scoreboard');
+            const buttonSection = document.getElementById('button-section');
+
+            scoreboard.insertBefore(teamA, document.querySelector('.vs-box'));
+            scoreboard.appendChild(teamB);
+
+            buttonSection.insertBefore(teamAButtons, teamBButtons);
+        }
+    </script>
+</body>
+</html>
